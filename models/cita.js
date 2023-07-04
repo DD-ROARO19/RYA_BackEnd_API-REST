@@ -8,6 +8,7 @@ const CitaShema = new mongoose.Schema({
     email:String,
     telefono:String,
     fecha:Date,
+    hora:String,
     descripcion:String,
     estado:Boolean
 });
