@@ -24,6 +24,7 @@ var clienteRouter = require('./routes/clientes');
 var abogadoRouter = require('./routes/abogados');
 var adminRouter = require('./routes/admins');
 var eventosRouter = require('./routes/eventos');
+var loginRouter = require('./routes/login');
 var indexRouter = require('./routes/index');  //Desactivar? (dejar de momento)
 var usersRouter = require('./routes/users');  //Desactivar? (dejar)
 
@@ -58,6 +59,7 @@ app.use('/clientes', clienteRouter);
 app.use('/abogados', abogadoRouter);
 app.use('/door', adminRouter);
 app.use('/eventos', eventosRouter);
+app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

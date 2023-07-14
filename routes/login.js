@@ -9,7 +9,7 @@ const admin = mongoose.model('Admin');
 //METODO
 
 // >>>> Login <<<< TESTING
-router.post('/login', async (req, res) => {
+router.post('/', async (req, res) => {
     let user_emp = await admin.findOne({ email: req.body.usuario }); //Primero buscara si el usuario es un Administrador.
 
     let mensaje = 'Usuario o contraseña incorrectos';
@@ -39,7 +39,8 @@ router.post('/login', async (req, res) => {
         apellido_paterno: user_emp.apellido_paterno,
         apellido_materno: user_emp.apellido_materno,
         email: user_emp.email,
-        puesto: user_emp.puesto
+        puesto: user_emp.puesto,
+        estado: user_emp.estado
     };
 
     // >>>> Enviar información seleccionada (en el futuro enviar junto al token)
@@ -48,3 +49,5 @@ router.post('/login', async (req, res) => {
     
 
 });
+
+module.exports = router;
