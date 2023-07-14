@@ -8,7 +8,8 @@ const AbogadoShema = new mongoose.Schema({
     NSS:Number,
     RFC:String,
     puesto:String,
-    password:String
+    password:String,
+    estado:Boolean
 });
 
 mongoose.model('Abogado', AbogadoShema);

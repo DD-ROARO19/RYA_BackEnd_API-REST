@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 
 const AdminShema = new mongoose.Schema({
-    cuenta:String,
+    nombre:String,
+    apellido_paterno:String,
+    apellido_materno:String,
     email:String,
-    area:String,
+    puesto:String,
     password:String,
     estado:Boolean
 });
