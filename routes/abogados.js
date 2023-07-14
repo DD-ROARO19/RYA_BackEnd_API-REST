@@ -88,7 +88,7 @@ router.put('/', async (req, res) => {
     if ( !ab ){ //Si no existe el Abogado, detener operación.
         return res.status(402).send('Abogado no encontrado');
     }
-b
+
     let ab_upd = await abogado.findOneAndUpdate(
         { email:req.body.email }, //Filtro.
         {  
