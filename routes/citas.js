@@ -46,13 +46,14 @@ router.post('/', async (req, res) => {
         email:req.body.email,
         telefono:req.body.telefono,
         fecha:req.body.fecha,
+        hora:req.body.hora,
         descripcion:req.body.descripcion,
-        estado:true
+        estado:false
     });
 
     await cii.save();
     // res.status(201).send({ cii, msj:'Exitosamente guardado' });
-    res.status(201).send({ msj:'Exitosamente guardado' });
+    res.status(201).send({ hora:req.body.hora, msj:'Exitosamente guardado' });
 
 });
 
@@ -72,6 +73,7 @@ router.put('/', async (req, res) => {
             apellido_materno:req.body.apellido_materno,
             telefono:req.body.telefono,
             fecha:req.body.fecha,
+            hora:req.body.hora,
             descripcion:req.body.descripcion,
             estado:req.body.estado
         },
