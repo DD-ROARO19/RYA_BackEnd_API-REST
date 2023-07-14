@@ -38,7 +38,7 @@ router.post('/mes', async (req, res) => {
     let ev = await evento.find({ fecha: { $gte: req.body.MesInicio, $lte: req.body.MesFin }, cuenta: req.body.cuenta });
 
     if ( ev == false ) {
-        return res.status(402).send('No se encontro ningun evento.');
+        return res.status(402).send({msg:'No se encontro ningun evento.'});
     }
 
     // >>>> Consultar la información
