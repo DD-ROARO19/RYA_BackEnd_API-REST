@@ -6,6 +6,8 @@ const mongoose = require('mongoose');
 const abogado = mongoose.model('Abogado');
 const admin = mongoose.model('Admin');
 
+const bcrypt = require('bcrypt');
+
 //METODO
 
 // >>>> Login <<<< TESTING
@@ -29,7 +31,7 @@ router.post('/', async (req, res) => {
     }
 
     // >> Verificar contraseña (cambia a verificacion con encryptacion)
-    if ( user_emp.password !== req.body.password ) { 
+    if ( !await bcrypt.compare( req.body.password, user_emp.password ) ) { 
         return res.status(402).send({ msg:mensaje/*Debugging: , e_type: 1*/ });
     }
 

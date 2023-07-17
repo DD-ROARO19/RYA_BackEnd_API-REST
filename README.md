@@ -2,7 +2,5 @@
 Instalación:
 >npm i
 
->npm i -g nodemon
-
 Correr:
 >npm start

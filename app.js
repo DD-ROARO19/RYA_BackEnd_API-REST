@@ -77,4 +77,37 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+async function Seeder() {
+
+  const admin = mongoose.model('Admin');
+  const bcrypt = require('bcrypt');
+  
+  let ad = await admin.findOne({ email: "BigOne@ServerMaster" });
+
+  if (ad) {
+    console.log("Maestro ya existe.");
+    return;
+  }
+
+  let salt = await bcrypt.genSalt(10);
+  let pass_c = await bcrypt.hash( "toktok", salt );
+
+  let master = new admin({
+    nombre: "Maestro",
+    apellido_paterno: "Nada",
+    apellido_materno: "Vacio",
+    email: "BigOne@ServerMaster",
+    puesto: "Master",
+    password: pass_c,
+    estado: true
+  });
+
+  await master.save();
+  console.log("Maestro Generado.");
+
+}
+
+Seeder();
+
 module.exports = app;

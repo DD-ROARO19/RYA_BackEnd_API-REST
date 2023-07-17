@@ -65,9 +65,9 @@ router.post('/', async (req, res) => {
     }
 
     let adm = new admin({
-        cuenta: ad.cuenta,
+        nombre: ad.cuenta,
         email: ad.email,
-        area: ad.area,
+        puesto: ad.area,
         password: ad.password,
         estado: true
     });
