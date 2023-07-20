@@ -14,7 +14,7 @@ require('./models/cita');
 require('./models/caso');
 require('./models/cliente');
 require('./models/abogado');
-require('./models/admin');
+// require('./models/admin'); // NO EN USO || Lo mantengo por si acaso.
 require('./models/evento');
 
 // >>>> RUTAS <<<<
@@ -22,7 +22,7 @@ var citasRouter = require('./routes/citas');
 var casosRouter = require('./routes/casos');
 var clienteRouter = require('./routes/clientes');
 var abogadoRouter = require('./routes/abogados');
-var adminRouter = require('./routes/admins');
+// var adminRouter = require('./routes/admins'); // NO EN USO || Lo mantengo por si acaso.
 var eventosRouter = require('./routes/eventos');
 var loginRouter = require('./routes/login');
 var indexRouter = require('./routes/index');  //Desactivar? (dejar de momento)
@@ -33,6 +33,10 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+
+// app.use('/foto', express.static(__dirname + '/IMG/')); // Testing || Borrar despues.
+app.use('/avatar', express.static(__dirname + '/IMG/perfil'));
+app.use('/fondo', express.static(__dirname + '/IMG/fondo'));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -57,7 +61,7 @@ app.use('/casos', casosRouter);
 app.use('/citas', citasRouter);
 app.use('/clientes', clienteRouter);
 app.use('/abogados', abogadoRouter);
-app.use('/door', adminRouter);
+// app.use('/door', adminRouter); // NO EN USO || Lo mantengo por si acaso.
 app.use('/eventos', eventosRouter);
 app.use('/login', loginRouter);
 
@@ -78,36 +82,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-async function Seeder() {
-
-  const admin = mongoose.model('Admin');
-  const bcrypt = require('bcrypt');
-  
-  let ad = await admin.findOne({ email: "BigOne@ServerMaster" });
-
-  if (ad) {
-    console.log("Maestro ya existe.");
-    return;
-  }
-
-  let salt = await bcrypt.genSalt(10);
-  let pass_c = await bcrypt.hash( "toktok", salt );
-
-  let master = new admin({
-    nombre: "Maestro",
-    apellido_paterno: "Nada",
-    apellido_materno: "Vacio",
-    email: "BigOne@ServerMaster",
-    puesto: "Master",
-    password: pass_c,
-    estado: true
-  });
-
-  await master.save();
-  console.log("Maestro Generado.");
-
-}
-
-Seeder();
+const { Seeders } = require("./middleware/gen");
+Seeders(); // Llamada a vevrificar la existencia del maestro del sistema.
 
 module.exports = app;

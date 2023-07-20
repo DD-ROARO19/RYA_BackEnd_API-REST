@@ -1,13 +1,15 @@
-const mongoose = require('mongoose');
+// NO EN USO || Lo mantengo por si acaso.
 
-const AdminShema = new mongoose.Schema({
-    nombre:String,
-    apellido_paterno:String,
-    apellido_materno:String,
-    email:String,
-    puesto:String,
-    password:String,
-    estado:Boolean
-});
+// const mongoose = require('mongoose');
 
-mongoose.model('Admin', AdminShema);
+// const AdminShema = new mongoose.Schema({
+//     nombre:String,
+//     apellido_paterno:String,
+//     apellido_materno:String,
+//     email:String,
+//     puesto:String,
+//     password:String,
+//     estado:Boolean
+// });
+
+// mongoose.model('Admin', AdminShema);

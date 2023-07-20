@@ -4,12 +4,23 @@ const AbogadoShema = new mongoose.Schema({
     nombre:String,
     apellido_paterno:String,
     apellido_materno:String,
-    email:String,
-    NSS:Number,
+    telefono:String,
+    NSS:String,
     RFC:String,
     puesto:String,
+    oficina:String,
+    email:String,
     password:String,
-    estado:Boolean
+    estado:Boolean,
+    admin:Boolean,
+    img:Object
 });
+
+AbogadoShema.methods.setImgAvatar = function setImgAvatar(img) {
+    this.img.avatar = 'http://localhost:3000/foto/'+img;
+}
+AbogadoShema.methods.setImgAvatar = function setImgFondo(img) {
+    this.img.fondo = 'http://localhost:3000/foto/'+img;
+}
 
 mongoose.model('Abogado', AbogadoShema);
