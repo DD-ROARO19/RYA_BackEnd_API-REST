@@ -37,9 +37,9 @@ router.post('/fecha', async (req, res) => {
 router.post('/mes', async (req, res) => {
     let ev = await evento.find({ fecha: { $gte: req.body.MesInicio, $lte: req.body.MesFin }, cuenta: req.body.cuenta });
 
-    if ( ev == false ) {
-        return res.status(402).send({msg:'No se encontro ningun evento.'});
-    }
+    // if ( ev == false ) {
+    //     return res.status(402).send({msg:'No se encontro ningun evento.'});
+    // }
 
     // >>>> Consultar la información
     res.send({ msg:'Eventos encontrados', ev, MesInicio: req.body.MesInicio, MesFin: req.body.MesFin });
@@ -118,16 +118,29 @@ router.put('/', async (req, res) => {
 
 // >>>> Borrar evento <<<<
 router.post('/borrar', async (req, res) => {
-    let ev = await evento.findOne({ id: req.body.id });
+    try {
+        const eventId = req.body._id; // Obtener el _id del evento desde el cuerpo de la solicitud
+        console.log("Evento a borrar:", eventId); // Agregar un log para verificar el _id recibido
 
-    if ( !ev ) {
-        return res.status(402).send('No encontrado');
+        // Verificar si el evento con el _id proporcionado existe en la base de datos
+        const eventToDelete = await evento.findById(eventId);
+        if (!eventToDelete) {
+            return res.status(404).json({ message: 'Evento no encontrado' });
+        }
+
+        // Realizar la eliminación del evento en la base de datos
+        const deletedEvent = await evento.findByIdAndDelete(eventId);
+
+        if (!deletedEvent) {
+            return res.status(500).json({ message: 'Error al borrar el evento' });
+        }
+
+        res.json({ deletedEvent, message: 'Evento borrado exitosamente' });
+    } catch (error) {
+        console.error('Error al borrar el evento:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
     }
-
-    let ev_del = await evento.findOneAndDelete({ id: ev.id });
-
-    res.send({ ev_del, msj:'Exitosamente borrado' });
-
 });
+
 
 module.exports = router;
