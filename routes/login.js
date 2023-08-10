@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
         puesto: user_emp.puesto,
         estado: user_emp.estado,
         id: user_emp._id,
+        token: user_emp.generarToken()
         // imgAvatar: imagenes[0]
     };
 

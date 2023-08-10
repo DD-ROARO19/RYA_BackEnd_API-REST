@@ -2,8 +2,9 @@ var express = require('express');
 var router = express.Router();
 
 const mongoose = require('mongoose');
-
 const abogado = mongoose.model('Abogado');
+
+const auth = require('../middleware/AuthJWT');
 
 /* GET users listing. */
 // >>>> Consultar todo <<<<
@@ -29,6 +30,7 @@ router.post('/email', async (req, res) => {
     }
 
     let ab_envio = {
+        id: ab._id,
         nombre: ab.nombre,
         apellido_paterno: ab.apellido_paterno,
         apellido_materno: ab.apellido_materno,
@@ -81,7 +83,7 @@ router.post('/borrar', async (req, res) => {
 });
 
 // >>>> Insertar <<<<
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     let ab = await abogado.findOne({ email: req.body.email });
 
     if ( ab ) {
