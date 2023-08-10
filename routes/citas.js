@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
         fecha:req.body.fecha,
         hora:req.body.hora,
         descripcion:req.body.descripcion,
-        estado:false
+        estado: "Pendiente"
     });
 
     await cii.save();

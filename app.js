@@ -47,7 +47,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Cors
 app.use(cors(
   {
-    origin: 'http://localhost:4200',
+    origin: ['http://localhost:4200','http://localhost:4201'],
     methods: ['GET', 'DELETE', 'PUT', 'POST'],
     preflightContinue: false,
     optionsSuccessStatus: 204

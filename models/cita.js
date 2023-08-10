@@ -10,7 +10,7 @@ const CitaShema = new mongoose.Schema({
     fecha:Date,
     hora:String,
     descripcion:String,
-    estado:Boolean
+    estado:String
 });
 
 mongoose.model('Cita', CitaShema);
