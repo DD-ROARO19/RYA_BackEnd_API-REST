@@ -16,6 +16,7 @@ require('./models/cliente');
 require('./models/abogado');
 // require('./models/admin'); // NO EN USO || Lo mantengo por si acaso.
 require('./models/evento');
+require("./models/sensor");
 
 // >>>> RUTAS <<<<
 var citasRouter = require('./routes/citas');
@@ -27,6 +28,7 @@ var eventosRouter = require('./routes/eventos');
 var loginRouter = require('./routes/login');
 var indexRouter = require('./routes/index');  //Desactivar? (dejar de momento)
 var usersRouter = require('./routes/users');  //Desactivar? (dejar)
+var arduinosensorRouter =require('./routes/arduinosensor');
 
 var app = express();
 
@@ -64,6 +66,7 @@ app.use('/abogados', abogadoRouter);
 // app.use('/door', adminRouter); // NO EN USO || Lo mantengo por si acaso.
 app.use('/eventos', eventosRouter);
 app.use('/login', loginRouter);
+app.use('/sensor',arduinosensorRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
