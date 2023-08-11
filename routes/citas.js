@@ -31,6 +31,12 @@ router.post('/email', async (req, res) => {
 
 });
 
+// >>>> Citas Pendientes <<<<
+router.post('/pendientes', async (req, res) => {
+    let ci = await cita.find({ estado: 'pendiente' });
+    res.send({ ci })
+});
+
 // >>>> Guardar <<<<
 router.post('/', async (req, res) => {
     let ci = await cita.findOne({ email: req.body.email });
